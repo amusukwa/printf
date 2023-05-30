@@ -1,23 +1,37 @@
-#include "main.h"
+#include <unistd.h>
+#include <stdio.h>
+/**
+ * _putchar - prints character
+ * @c: character c
+ * Return: 1 if successful -1 on error
+ */
+
+int _putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
 /**
  * to_hexa - converts to hexadecimal
- * @decNum:input parameter
- * Return :integer
+ * @num:input parameter
+ * Return:integer
  */
-int to_hexa( long int decNum)
+int to_hexa(unsigned int num)
 {
+unsigned int hex = 0xF0000000;
+int shift = 28;
 
-long int decNum,rem,quo;
-int i=1,j,temp;
-char hexadecNum[100];
-quo = decNum;
-while(quo!=0)
+while (shift >= 0)
 {
-temp = quo % 16;
-if( temp < 10)
-temp =temp + 48; else
-temp = temp + 55;
-hexadecNum[i++]= temp;
-quo = quo / 16;
-return (quo);
+unsigned int digit = (num & hex) >> shift;
+if (digit < 10)
+_putchar(digit + '0');
+else
+_putchar(digit - 10 + 'A');
+hex >>= 4;
+shift -= 4;
+
+_putchar('\n');
+return (0);
 }
+

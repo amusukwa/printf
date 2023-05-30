@@ -18,10 +18,13 @@ return (write(1, &c, 1));
  */
 int print_integer(int arg)
 {
-
 int divisor;
-
-if (arg < 0)
+if (arg >= 0)
+{
+_putchar(' ');
+_putchar('+');
+}
+else
 {
 _putchar('-');
 arg = -arg;

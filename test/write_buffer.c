@@ -11,12 +11,24 @@
  */
 int main(void)
 {
- char buffer[100];
- int size;
+ char buffer[1024];
+  int size = 1024;
  int fd;
-if (buffer[size] == 1024)
-write(fd, &buffer, strlen(buffer));
-close(fd);
+ fd = open("output.txt", O_WRONLY | O_CREAT, 0644);
+ if (fd == -1) {
+        perror("Error opening file");
+        return 1;
+    }
+
+ if (write(fd, buffer, size) == -1) {
+        perror("Error writing to file");
+        close(fd);
+        return 1;
+    }
+    if (close(fd) == -1) {
+        perror("Error closing file");
+        return 1;
+    }
 
 return (0);
 }
