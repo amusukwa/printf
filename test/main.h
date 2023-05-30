@@ -8,5 +8,4 @@ int print_integer(int arg);
 void tu_u(unsigned int n);
 int to_hexa( unsigned int num);
 void to_octal(long dec);
-void printString(const char *str)
 #endif

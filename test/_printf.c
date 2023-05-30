@@ -62,6 +62,7 @@ int _printf(const char *format, ...)
 {
 	int n = 0;
 	char *str;
+	int width;
 
 	va_list args;
 
@@ -75,14 +76,51 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+			if (*format >= '0' && *format <= '9')
+		       	{
+				width = 0;
+				while (*format >= '0' && *format <= '9') {
+                    	width = width * 10 + (*format - '0');
+                    	format++;
+                }
+			}
+		       	else
+		       	{
+                width = 0; 
+            }
 			switch (*format)
 			{
 				case 'c':
+					  if (width > 1)
+					  {
+                       				 for (int i = 1; i < width; i++)
+                           			 n += _putchar(' ');
+                    			  }		
 					n += _putchar(va_arg(args, int));
 					break;
 				case 's':
-					for (str = va_arg(args, char *); *str; str++)
-						n += _putchar(*str);
+					str = va_arg(args, char *);
+					if (str == NULL)
+                        		str = "(null)";
+					if (width > 0) {
+                     			   int len = 0;
+                        		char *temp = str;
+                        		while (*temp)
+                        		{
+                            		len++;
+                           		 temp++;
+                        		}
+                        		if (len < width)
+					{
+                            		for (int i = len; i < width; i++)
+                                	n += _putchar(' ');
+                        		}
+                    			}
+					while (*str)
+                   			 {
+                        			n += _putchar(*str);
+                        			str++;
+                    			}
 					break;
 				case '%':
 					n += _putchar('%');
