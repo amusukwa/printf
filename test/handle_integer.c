@@ -12,30 +12,18 @@ return (write(1, &c, 1));
 }
 /**
  * print_integer - prints integer
- * @formatstr:input string
+ * @arg:input string
  * @...:list of arguments
  * Return: integer
  */
-int print_integer(const char *formatstr, ...)
+int print_integer(int arg)
 {
-va_list args;
-int arg, divisor;
-char *str;
-va_start(args, formatstr);
-while (*formatstr)
-{
-if (*formatstr == '%')
-{
-formatstr++;
-switch (*formatstr)
-{
-case 'd':
-arg = va_arg(args, int);
-for (str = va_arg(args, char *); *str; str++)
-_putchar(*str);
+
+int divisor;
+
 if (arg < 0)
 {
-putchar('-');
+_putchar('-');
 arg = -arg;
 }
 divisor = 1;
@@ -47,19 +35,8 @@ while (divisor > 0)
 {
 int digit = arg / divisor;
 _putchar('0' + digit);
-arg %= divisor /= 10;
+arg %= divisor;
+divisor /= 10;
 }
-break;
-default:
-break;
-}
-}
-else
-{
-_putchar(*formatstr);
-}
-formatstr++;
-}
-va_end(args);
 return (0);
 }

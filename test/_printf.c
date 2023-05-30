@@ -91,10 +91,15 @@ int _printf(const char *format, ...)
 					 n +=_putchar(va_arg(args, int));
 					 break;
 				case 'i':
+					  print_integer(va_arg(args, int));
+					 break;
 			
 				case 'b':
 					 bin(va_arg(args, int));
-					 break;	 
+					 break;
+				case 'u':
+					tu_u(va_arg(args, unsigned int));
+		       			break;		
 				default:
 					break;
 			}

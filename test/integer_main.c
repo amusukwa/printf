@@ -7,7 +7,9 @@
  */
 int main(void)
 {
-    printf("%d\n", -98);
-    _printf("%d\n", -98);
+      int num = -12345;
+    printf("Number: ");
+    print_integer(num);
+    putchar('\n');
     return (0);
 }
