@@ -2,15 +2,6 @@
 #include <stdarg.h>
 #include <unistd.h>
 /**
- * _putchar - prints character
- * @c: character c
- * Return: 1 if successful -1 on error
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-/**
  * _printf - prints out characters
  * @format: containst format specifiers
  * Return: number of characters printed
@@ -43,6 +34,12 @@ int _printf(const char *format, ...)
 					break;
 				case '%':
 					n += _putchar('%');
+					break;
+				case 'd':
+					n += print_int(va_arg(args, int));
+					break;
+				case 'i':
+					n += print_int(va_arg(args, int));
 					break;
 				default:
 					break;
