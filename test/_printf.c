@@ -36,7 +36,7 @@ else
 {
 width = 0; 
 }
-			switch (*format)
+	switch (*format)
 			{
 				case 'c':
 					  if (width > 1)
@@ -97,7 +97,7 @@ width = 0;
 					break;
 				case 'S':
 					 str = va_arg(args, char *);
-					printString(str);		
+					printString(str, width);		
 				default:
 					break;
 			}
