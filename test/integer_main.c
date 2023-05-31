@@ -1,5 +1,7 @@
 #include "main.h"
 #include <stdio.h>
+#include <stdarg.h>
+
 /**
  * main - Entry point
  *
@@ -7,9 +9,8 @@
  */
 int main(void)
 {
-      int num = -12345;
-    printf("Number: ");
-    print_integer(num);
+    va_list args;
+    print_integer(va_arg(args, int));
     putchar('\n');
     return (0);
 }

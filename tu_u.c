@@ -7,7 +7,7 @@
  */
 int _putchar(char c)
 {
-	return (write(1, &c, 1));
+        return (write(1, &c, 1));
 }
 /**
  * tu_u - converts to unsigned decimal
@@ -16,7 +16,7 @@ int _putchar(char c)
  */
 void tu_u(unsigned int n)
 {
-	if (n == 0) {
+        if (n == 0) {
         putchar('0');
         return;
     }
@@ -26,4 +26,5 @@ void tu_u(unsigned int n)
 
     _putchar(n % 10 + '0');
 }
-    
+
+

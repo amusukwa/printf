@@ -29,17 +29,5 @@ else
 _putchar('-');
 arg = -arg;
 }
-divisor = 1;
-while (arg / divisor >= 10)
-{
-divisor *= 10;
 }
-while (divisor > 0)
-{
-int digit = arg / divisor;
-_putchar('0' + digit);
-arg %= divisor;
-divisor /= 10;
-}
-return (0);
-}
+
