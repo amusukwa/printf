@@ -33,9 +33,4 @@ putchar(*ptr);
 }
 ptr++;
 }
-int main() {
-const char *str ="Best\nSchool" ;
-printString(str);
-_putchar('\n');
-return 0;
-}
+

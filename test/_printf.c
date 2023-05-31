@@ -2,56 +2,6 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <stdio.h>
-/**
- * _putchar - prints character
- * @c: character c
- * Return: 1 if successful -1 on error
- */
-int _putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-/**
- * bin2 - prints binary
- * @num:input parameter
- * Return:no return type
- */
- void bin2(unsigned int num)
-  {
-   char result[sizeof(num)*8];
-        int count = 0;
-        while(num)
-        {
-                result[count++] = (((num & 1) == 1) ? '1' : '0');
-                num>>=1;
-        }
-        if(count)
-        {
-                count--;
-                while(count>=0)
-                {
-                        _putchar(result[count--]);
-                }
-        }
-        else
-        {
-                _putchar('0');
-        }
-        _putchar('\n');
-}
-
-/**
- * bin - prints binary
- * @num:input parameter
- * Return:no return type
- */
-void bin(unsigned int num)
-{
-        if(!num) return;
-
-        bin2(num>>1);
-        _putchar((((num & 1) == 1) ? '1' : '0'));
-}
 
 /**
  * _printf - prints out characters
@@ -137,7 +87,19 @@ int _printf(const char *format, ...)
 					 break;
 				case 'u':
 					tu_u(va_arg(args, unsigned int));
-		       			break;		
+		       			break;
+				case 'o':
+					to_octal(va_arg(args, long int));
+					break;
+				case 'x':
+					to_hexa(va_arg(args, unsigned int));
+					break;
+				case 'X':
+					to_hexa(va_arg(args, unsigned int));		
+					break;
+				case 'S':
+					 str = va_arg(args, char *);
+					printString(str);		
 				default:
 					break;
 			}
