@@ -74,26 +74,26 @@ width = 0;
 					n += _putchar('%');
 					break;
 				case 'd':
-					 n +=_putchar(va_arg(args, int));
+					 print_integer(va_arg(args, int), width);
 					 break;
 				case 'i':
-					  print_integer(va_arg(args, int));
+					  print_integer(va_arg(args, int), width);
 					 break;
 			
 				case 'b':
 					 bin(va_arg(args, int));
 					 break;
 				case 'u':
-					tu_u(va_arg(args, unsigned int));
+					tu_u(va_arg(args, unsigned int), width);
 		       			break;
 				case 'o':
-					to_octal(va_arg(args, long int));
+					to_octal(va_arg(args, long int), width);
 					break;
 				case 'x':
-					to_hexa(va_arg(args, unsigned int));
+					to_hexa(va_arg(args, unsigned int), width);
 					break;
 				case 'X':
-					to_hexa(va_arg(args, unsigned int));		
+					to_hexa(va_arg(args, unsigned int), width);		
 					break;
 				case 'S':
 					 str = va_arg(args, char *);
