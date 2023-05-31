@@ -5,7 +5,7 @@
  * @u:input parameter
  * Return:no return
  */
-void tu_u(unsigned int n int precision)
+void tu_u(unsigned int, int precision)
 {
         if (n == 0) {
         putchar('0');
