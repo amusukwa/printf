@@ -4,40 +4,38 @@
 #include <stdio.h>
 
 /**
- * _printf - prints out characters
- * @format: containst format specifiers
- * Return: number of characters printed
- */
+* _printf - prints out characters
+* @format: containst format specifiers
+* Return: number of characters printed
+*/
 int _printf(const char *format, ...)
 {
-	int n = 0;
-	char *str;
-	int width;
+int n = 0;
+char *str;
+int width;
+va_list args;
+va_start(args, format);
 
-	va_list args;
-
-	va_start(args, format);
-
-	if (format == NULL)
-		return (-1);
-
-	while (*format)
-	{
-		if (*format == '%')
-		{
-			format++;
-			if (*format >= '0' && *format <= '9')
-		       	{
-				width = 0;
-				while (*format >= '0' && *format <= '9') {
-                    	width = width * 10 + (*format - '0');
-                    	format++;
-                }
-			}
-		       	else
-		       	{
-                width = 0; 
-            }
+if (format == NULL)
+return (-1);
+while (*format)
+{
+if (*format == '%')
+{
+format++;
+if (*format >= '0' && *format <= '9')
+{
+width = 0;
+while (*format >= '0' && *format <= '9')
+{ 
+width = width * 10 + (*format - '0');
+ 	format++;
+}
+}
+else
+{
+width = 0; 
+}
 			switch (*format)
 			{
 				case 'c':

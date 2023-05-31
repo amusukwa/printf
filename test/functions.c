@@ -5,17 +5,28 @@
  * @u:input parameter
  * Return:no return
  */
-void tu_u(unsigned int n)
+void tu_u(unsigned int n int precision)
 {
         if (n == 0) {
         putchar('0');
         return;
     }
 
-    if (n / 10 > 0)
-  tu_u(n / 10);
+unsigned int temp = n;
+int digitCount = 0;
+while (temp > 0)
+{
+temp /= 10;
+digitCount++;
+}
 
-    _putchar(n % 10 + '0');
+if (precision > digitCount)
+precision = digitCount;
+
+if (n / 10 > 0 && precision > 0)
+tu_u(n / 10);
+
+_putchar(n % 10 + '0');
 }
 /**
  * print_integer - prints integer
@@ -44,7 +55,7 @@ arg = -arg;
  * Return: no return type
  */
 
-void to_octal(long dec)
+void to_octal(long dec, int precision)
 {
 long remainder, quotient = 0;
 int octalNumber[100], i = 1, j;
@@ -55,7 +66,16 @@ while (quotient != 0)
 octalNumber[i++] = quotient % 8;
 quotient = quotient / 8;
 }
-for (j = i - 1; j > 0; j--)
+
+if (precision > i - 1)
+precision = i - 1;
+
+for (j = 1; j <= precision - (i - 1); j++)
+{
+putchar('0');
+}
+
+for (j = i - 1; j > 0 && precision > 0; j--)
 {
 _putchar('0' + octalNumber[j]);
 }
@@ -68,7 +88,7 @@ _putchar('\n');
  * Return:integer
  */
 
-int to_hexa(unsigned int num)
+int to_hexa(unsigned int num, int precision)
 {
 unsigned int hex = 0xF0000000;
 int shift = 28;
@@ -82,6 +102,11 @@ else
 _putchar(digit - 10 + 'A');
 hex >>= 4;
 shift -= 4;
+
+if (precision > 0)
+precision--;
+else
+break;
 }
 _putchar('\n');
 }
@@ -91,12 +116,13 @@ _putchar('\n');
  * @str: input character
  * Return:
  */
-void printString(const char *str)
+void printString(const char *str,  int precision)
 {
 
 const unsigned char *ptr = (const unsigned char *)str;
+int count = 0;
 
-while (*ptr != '\0')
+while (*ptr != '\0' && count < precision)
 {
 if (*ptr < 32 || *ptr >= 127)
 {
@@ -110,8 +136,8 @@ else
 _putchar(*ptr);
 }
 ptr++;
+count++;
 }
-
 }
 
 
@@ -127,7 +153,7 @@ int count = 0;
 while (num)
 {
 result[count++] = (((num & 1) == 1) ? '1' : '0');
-num >> = 1;
+num >>= 1;
 }
 if (count)
 {
