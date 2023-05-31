@@ -24,7 +24,7 @@ if (precision > digitCount)
 precision = digitCount;
 
 if (n / 10 > 0 && precision > 0)
-tu_u(n / 10, precision);
+tu_u(n / 10, precision - 1);
 
 _putchar(n % 10 + '0');
 }
@@ -195,10 +195,20 @@ _putchar('\n');
 * @num:input parameter
 * Return:no return type
 */
-void bin(unsigned int num)
+void bin(unsigned int num, int precision)
 {
-if (!num)
+if (num == 0)
+{
+while (precision > 0)
+{
+_putchar('0');
+precision--;
+}
 return;
-bin2(num >> 1);
+}
+
+if (!num && precision < 0)
+return;
+bin2(num >> 1, precision - 1);
 _putchar((((num & 1) == 1) ? '1' : '0'));
 }
