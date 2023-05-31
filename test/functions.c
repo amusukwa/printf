@@ -34,9 +34,10 @@ _putchar(n % 10 + '0');
  * @...:list of arguments
  * Return: integer
  */
-int print_integer(int arg)
+int print_integer(int arg, int precision)
 {
 int divisor;
+ int digit_count = 0;
 if (arg >= 0)
 {
 _putchar(' ');
@@ -47,6 +48,26 @@ else
 _putchar('-');
 arg = -arg;
 }
+
+divisor = 1;
+while (divisor <= arg / 10)
+{
+divisor *= 10;
+}
+while (divisor > 0)
+{
+int digit = (arg / divisor) % 10;
+_putchar(digit + '0');
+divisor /= 10;
+digit_count++;
+
+if (digit_count >= precision)
+{
+break;
+}
+}
+return digit_count;
+
 }
 
 /**
