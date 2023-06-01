@@ -34,21 +34,21 @@ _putchar(n % 10 + '0');
  * @...:list of arguments
  * Return: integer
  */
-int print_integer(int arg, int precision)
+int print_integer(int arg, int precision, int width, char padding_char,int zeroFlag)
 {
-int divisor;
- int digit_count = 0;
+int divisor, digit;
+int neg = 0;
+int digit_count = 0;
 if (arg >= 0)
+neg = 1;
+arg = -arg;
+
+if (arg == 0)
 {
-_putchar(' ');
-_putchar('+');
+digit_count++;
 }
 else
 {
-_putchar('-');
-arg = -arg;
-}
-
 divisor = 1;
 while (divisor <= arg / 10)
 {
@@ -60,14 +60,43 @@ int digit = (arg / divisor) % 10;
 _putchar(digit + '0');
 divisor /= 10;
 digit_count++;
-
 if (digit_count >= precision)
 {
 break;
 }
 }
-return digit_count;
+}
+if (neg)
+{
+digit_count++;
+}
+int paddingCount = width - digit_count;
+if (paddingCount > 0)
+{
+if (zeroFlag && !neg) 
+{
+_putchar('+');
+}
+else if (neg)
+{
+_putchar('-');
+}
 
+while (paddingCount > 0)
+{
+_putchar(padding_char);
+paddingCount--;
+}
+if (neg && !(zeroFlag && !neg))
+{
+_putchar('-');
+}
+else if (paddingCount == ' ')
+{
+_putchar('+');
+}
+
+return digit_count;
 }
 
 /**
@@ -76,10 +105,10 @@ return digit_count;
  * Return: no return type
  */
 
-void to_octal(long dec, int precision)
+void to_octal(long dec, int precision, int width, char padding_char, int zeroFlag)
 {
 long remainder, quotient = 0;
-int octalNumber[100], i = 1, j;
+int octalNumber[100], i = 1, j, digit_count, paddingCount;
 quotient = dec;
 
 while (quotient != 0)
@@ -87,18 +116,25 @@ while (quotient != 0)
 octalNumber[i++] = quotient % 8;
 quotient = quotient / 8;
 }
+int digit_count = i - 1;
+if (precision > digit_count)
+precision = digit_count;
 
-if (precision > i - 1)
-precision = i - 1;
-
-for (j = 1; j <= precision - (i - 1); j++)
+int paddingCount = width - digit_count;
+if (paddingCount > 0 && zeroFlag)
 {
-putchar('0');
+_putchar('0');
+paddingCount--; 
 }
-
-for (j = i - 1; j > 0 && precision > 0; j--)
+while (paddingCount > 0)
+{
+_putchar(padding_char);
+paddingCount--;
+}
+for (j = digit_count; j > 0 && precision > 0; j--)
 {
 _putchar('0' + octalNumber[j]);
+precision--;
 }
 _putchar('\n');
 }
@@ -109,10 +145,10 @@ _putchar('\n');
  * Return:integer
  */
 
-int to_hexa(unsigned int num, int precision)
+int to_hexa(unsigned int num, int precision, int width, char paddingCount, int zeroFlag)
 {
 unsigned int hex = 0xF0000000;
-int shift = 28;
+int shift = 28, i = 1;
 
 while (shift >= 0)
 {
@@ -123,11 +159,22 @@ else
 _putchar(digit - 10 + 'A');
 hex >>= 4;
 shift -= 4;
-
-if (precision > 0)
-precision--;
-else
+digit_count++;
+int digit_count = i - 1;
+if (precision > digit_count)
 break;
+int paddingCount = width - digit_count;
+if (paddingCount > 0)
+{
+if (zeroFlag)
+{
+_putchar('0');
+paddingCount--;
+}
+}
+for (;paddingCount > 0; paddingCount--)
+{
+_putchar(paddingChar);
 }
 _putchar('\n');
 }
@@ -137,13 +184,22 @@ _putchar('\n');
  * @str: input character
  * Return:
  */
-void printString(const char *str,  int precision)
+void printString(const char *str,  int precision, int width, char paddingCount, int zeroFlag)
 {
 
 const unsigned char *ptr = (const unsigned char *)str;
 int count = 0;
 
-while (*ptr != '\0' && count < precision)
+int paddingCount = width - precision;
+if (paddingCount > 0)
+{
+for (; paddingCount > 0; paddingCount--;)
+{
+_putchar(paddingChar);
+}
+}
+
+while (*ptr != '\0' && count < precision && precision != width)
 {
 if (*ptr < 32 || *ptr >= 127)
 {
@@ -195,11 +251,20 @@ _putchar('\n');
 * @num:input parameter
 * Return:no return type
 */
-void bin(unsigned int num, int precision)
+void bin(unsigned int num, int precision int width, char paddingChar, int zeroFlag)
 {
+
+int paddingCount = width - precision;
+if (paddingCount > 0)
+{
+for (; paddingCount > 0; paddingCount--;)
+{
+_putchar(paddingChar);
+}
+}
 if (num == 0)
 {
-while (precision > 0)
+while (precision > 0 && precision != width)
 {
 _putchar('0');
 precision--;
@@ -209,6 +274,6 @@ return;
 
 if (!num && precision < 0)
 return;
-bin2(num >> 1, precision - 1);
+bin2(num >> 1);
 _putchar((((num & 1) == 1) ? '1' : '0'));
 }
