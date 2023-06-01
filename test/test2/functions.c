@@ -7,6 +7,8 @@
  */
 void tu_u(unsigned int n, int precision, int width, char paddingChar, int zeroFlag)
 {
+unsigned int temp = n;
+int digitCount = 0;
 int i;
 if (n == 0 && precision != 0)
 {
@@ -20,9 +22,7 @@ _putchar(paddingChar);
 }
 }
 return;
-
-unsigned int temp = n;
-int digitCount = 0;
+ 
 while (temp > 0)
 {
 temp /= 10;
@@ -56,7 +56,7 @@ _putchar(paddingChar);
  */
 int print_integer(int arg, int precision, int width, char padding_char,int zeroFlag)
 {
-int divisor, digit;
+int divisor, digit, paddingCount;
 int neg = 0;
 int digit_count = 0;
 if (arg >= 0)
@@ -199,17 +199,19 @@ _putchar(paddingChar);
 }
 _putchar('\n');
 }
+}
 
 /**
  * printString - handles printing of S format
  * @str: input character
  * Return:
  */
-void printString(const char *str,  int precision, int width, char paddingCount, int zeroFlag)
+void printString(const char *str,  int precision, int width, char paddingChar, int zeroFlag)
 {
 
 const unsigned char *ptr = (const unsigned char *)str;
-int count = 0, paddingCount;
+int count = 0;
+int paddingCount;
 
 paddingCount = width - precision;
 if (paddingCount > 0)
@@ -278,7 +280,7 @@ void bin(unsigned int num, int precision, int width, char paddingChar, int zeroF
 int paddingCount = width - precision;
 if (paddingCount > 0)
 {
-for (; paddingCount > 0; paddingCount--;)
+for (; paddingCount > 0; paddingCount--)
 {
 _putchar(paddingChar);
 }
