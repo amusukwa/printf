@@ -13,6 +13,9 @@ int _printf(const char *format, ...)
 int n = 0;
 char *str;
 int width;
+int precision = -1;
+char paddingChar = ' ';
+int zeroFlag = 0;
 va_list args;
 va_start(args, format);
 
@@ -33,6 +36,24 @@ while (*format >= '0' && *format <= '9')
 precision = precision * 10 + (*format - '0');
 format++;
 }
+width = 0;
+zeroFlag = 0;
+
+if (*format >= '0' && *format <= '9')
+{
+width = 0;
+while (*format >= '0' && *format <= '9')
+{
+width = width * 10 + (*format - '0');
+format++;
+}
+}
+if (*format == '0')
+{
+zeroFlag = 1;
+format++;
+}           
+
 }
 switch (*format)
 {
@@ -73,29 +94,29 @@ case '%':
 n += _putchar('%');
 break;
 case 'd':
-print_integer(va_arg(args, int), precision);
+print_integer(va_arg(args, int), precision, width, paddingChar, zeroFlag);
 break;
 case 'i':
-print_integer(va_arg(args, int), precision);
+print_integer(va_arg(args, int), precision, width, paddingChar, zeroFlag);
 break;
 case 'b':
-bin(va_arg(args, int), precision);
+bin(va_arg(args, int), precision, width, paddingChar, zeroFlag);
 break;
 case 'u':
-tu_u(va_arg(args, unsigned int), precision);
+tu_u(va_arg(args, unsigned int), precision,width, paddingChar, zeroFlag);
 break;
 case 'o':
-to_octal(va_arg(args, long int), precision);
+to_octal(va_arg(args, long int), precision, width, paddingChar, zeroFlag);
 break;
 case 'x':
-to_hexa(va_arg(args, unsigned int), precision);
+to_hexa(va_arg(args, unsigned int), precision, width, paddingChar, zeroFlag);
 break;
 case 'X':
-to_hexa(va_arg(args, unsigned int), precision);		
+to_hexa(va_arg(args, unsigned int), precision, width, paddingChar, zeroFlag);		
 break;
 case 'S':
 str = va_arg(args, char *);
-printString(str, width);		
+printString(str, precision, width, paddingChar, zeroFlag);
 default:
 break;
 }
