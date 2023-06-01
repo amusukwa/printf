@@ -12,7 +12,7 @@ int _printf(const char *format, ...)
 {
 int n = 0;
 char *str;
-int width;
+int width, i;
 int precision = -1;
 char paddingChar = ' ';
 int zeroFlag = 0;
@@ -60,7 +60,7 @@ switch (*format)
 case 'c':
 if (width > 1)
 {
-for (int i = 1; i < width; i++)
+for (i = 1; i < width; i++)
 n += _putchar(' ');
 }		
 n += _putchar(va_arg(args, int));
@@ -80,7 +80,7 @@ temp++;
 }
 if (len < width)
 {
-for (int i = len; i < width; i++)
+for (i = len; i < width; i++)
 n += _putchar(' ');
 }
 }

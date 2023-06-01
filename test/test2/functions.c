@@ -39,7 +39,7 @@ _putchar(n % 10 + '0');
 if (digitCount < width)
 {
 int paddingCount = width - digitCount;
-for (int i = 0; i < paddingCount; i++)
+for (i = 0; i < paddingCount; i++)
 {
 if (zeroFlag)
 _putchar('0');
@@ -54,7 +54,7 @@ _putchar(paddingChar);
  * @...:list of arguments
  * Return: integer
  */
-int print_integer(int arg, int precision, int width, char padding_char,int zeroFlag)
+int print_integer(int arg, int precision, int width, char paddingChar,int zeroFlag)
 {
 int divisor, digit, paddingCount;
 int neg = 0;
@@ -91,21 +91,14 @@ if (neg)
 digit_count++;
 }
 paddingCount = width - digit_count;
-if (paddingCount > 0)
-{
-if (zeroFlag && !neg) 
+if (paddingCount > 0 && zeroFlag && !neg)
 {
 _putchar('+');
 }
-else if (neg)
-{
-_putchar('-');
-}
 
-while (paddingCount > 0)
+for (; paddingCount > 0; paddingCount--)
 {
-_putchar(padding_char);
-paddingCount--;
+_putchar(paddingChar);
 }
 if (neg && !(zeroFlag && !neg))
 {
@@ -115,10 +108,9 @@ else if (paddingCount == ' ')
 {
 _putchar('+');
 }
-
 return digit_count;
 }
-}
+
 
 /**
  * to_octal - converts to octal
@@ -128,7 +120,7 @@ return digit_count;
 
 void to_octal(long dec, int precision, int width, char padding_char, int zeroFlag)
 {
-long remainder, quotient = 0;
+long quotient = 0;
 int octalNumber[100], i = 1, j, digit_count, paddingCount;
 quotient = dec;
 
@@ -166,7 +158,7 @@ _putchar('\n');
  * Return:integer
  */
 
-int to_hexa(unsigned int num, int precision, int width, char paddingChar, int zeroFlag)
+void to_hexa(unsigned int num, int precision, int width, char paddingChar, int zeroFlag)
 {
 unsigned int hex = 0xF0000000;
 int shift = 28, i = 1, digit_count, paddingCount;
@@ -208,7 +200,6 @@ _putchar('\n');
  */
 void printString(const char *str,  int precision, int width, char paddingChar, int zeroFlag)
 {
-
 const unsigned char *ptr = (const unsigned char *)str;
 int count = 0;
 int paddingCount;
@@ -218,7 +209,11 @@ if (paddingCount > 0)
 {
 for (; paddingCount > 0; paddingCount--)
 {
-_putchar(paddingChar);
+if (zeroFlag)
+_putchar('0');
+else
+ _putchar(paddingChar);
+
 }
 }
 
@@ -282,6 +277,9 @@ if (paddingCount > 0)
 {
 for (; paddingCount > 0; paddingCount--)
 {
+if (zeroFlag)
+ _putchar('0');
+else
 _putchar(paddingChar);
 }
 }
