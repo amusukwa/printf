@@ -23,18 +23,16 @@ while (*format)
 if (*format == '%')
 {
 format++;
-if (*format >= '0' && *format <= '9')
+
+if (*format == '.')
 {
-width = 0;
+format++;
+precision = 0;
 while (*format >= '0' && *format <= '9')
-{ 
-width = width * 10 + (*format - '0');
- 	format++;
-}
-}
-else
 {
-width = 0; 
+precision = precision * 10 + (*format - '0');
+format++;
+}
 }
 switch (*format)
 {
@@ -75,25 +73,25 @@ case '%':
 n += _putchar('%');
 break;
 case 'd':
-print_integer(va_arg(args, int), width);
+print_integer(va_arg(args, int), precision);
 break;
 case 'i':
-print_integer(va_arg(args, int), width);
+print_integer(va_arg(args, int), precision);
 break;
 case 'b':
-bin(va_arg(args, int), width);
+bin(va_arg(args, int), precision);
 break;
 case 'u':
-tu_u(va_arg(args, unsigned int), width);
+tu_u(va_arg(args, unsigned int), precision);
 break;
 case 'o':
-to_octal(va_arg(args, long int), width);
+to_octal(va_arg(args, long int), precision);
 break;
 case 'x':
-to_hexa(va_arg(args, unsigned int), width);
+to_hexa(va_arg(args, unsigned int), precision);
 break;
 case 'X':
-to_hexa(va_arg(args, unsigned int), width);		
+to_hexa(va_arg(args, unsigned int), precision);		
 break;
 case 'S':
 str = va_arg(args, char *);
