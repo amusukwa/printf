@@ -7,15 +7,15 @@
  */
 int print_string(const char *str)
 {
-	int n;
-	int i = 0;
+	int i;
+	int n = 0;
 
-	for (n = 0; str[n] != '\0'; n++)
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (str[n] >= 32 && str[n] < 127)
+		if (str[i] >= 32 && str[i] < 127)
 		{
 			_putchar(str[i]);
-			i++;
+			n++;
 		}
 		else
 		{
@@ -23,9 +23,9 @@ int print_string(const char *str)
 			_putchar('x');
 			_putchar("0123456789ABCDEF"[(unsigned char)str[n] / 16]);
 			_putchar("0123456789ABCDEF"[(unsigned char)str[n] % 16]);
-			i += 4;
+			n += 4;
 		}
-		i++;
+		n++;
 	}
-	return (i);
+	return (n);
 }
