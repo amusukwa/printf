@@ -9,9 +9,9 @@ int find_pointer(void *ptr)
 {
 	int n, i, digit;
 	char str[17];
-	unsigned long long number;
+	unsigned long number;
 
-	number = (unsigned long long) ptr;
+	number = (unsigned long) ptr;
 	n = 2;
 	i = 15;
 

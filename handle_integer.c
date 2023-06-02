@@ -10,6 +10,8 @@ int print_int(int number)
 {
         int i, n, d;
 
+	n = 0;
+
         if (number < 0)
         {
                 _putchar('-');
@@ -30,4 +32,5 @@ int print_int(int number)
                 number %= i;
                 i /= 10;
         }
+	return (n);
 }
