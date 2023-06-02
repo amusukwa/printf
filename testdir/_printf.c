@@ -35,15 +35,10 @@ int _printf(const char *format, ...)
 				case '%':
 					n += _putchar('%');
 					break;
-				case 'd':
-					n += print_int(va_arg(args, int));
-					break;
-				case 'i':
-					n += print_int(va_arg(args, int));
-					break;
 				case 'p':
 					n += find_pointer(va_arg(args, void *));
 					break;
+
 				default:
 					break;
 			}
