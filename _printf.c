@@ -44,6 +44,10 @@ int _printf(const char *format, ...)
 				case 'p':
 					n += find_pointer(va_arg(args, void *));
 					break;
+				case 'S':
+					n += print_string(va_arg(args, const char *));
+					break;
+
 				default:
 					break;
 			}
