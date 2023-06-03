@@ -15,14 +15,38 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	if (format == NULL)
-		return (-1);
-
-	while (*format)
+	for (int i = 0; format[i] != '\0'; i++) 
 	{
-		if (*format == '%')
-		{
-			format++;
+        if (format[i] == '%') {
+            i++; 
+            int width = 0;
+            int precision = 0;
+            int zeroFlag = 0;
+	    char paddingChar = '';
+            
+            if (format[i] >= '0' && format[i] <= '9')
+	    {
+                width = format[i] - '0';
+                i++;
+            }
+
+            if (format[i] == '.')
+	    {
+                i++;
+                if (format[i] >= '0' && format[i] <= '9')
+	       	{
+                    precision = format[i] - '0';
+                    i++;
+                }
+            }
+
+            if (format[i] == '0')
+	    {
+                zeroFlag = 1;
+                i++;
+            }
+
+
 			switch (*format)
 			{
 				case 'c':
@@ -35,10 +59,12 @@ int _printf(const char *format, ...)
 				case '%':
 					n += _putchar('%');
 					break;
-				/**case 'd':
-					n += print_int(va_arg(args, int));
-					break;
 				case 'i':
+					n = va_arg(args, unsigned int);
+					void tu_u( n, precision, width, paddingChar, zeroFlag)
+
+					break;
+				/**case 'i':
 					n += print_int(va_arg(args, int));
 					break;
 				case 'p':
@@ -50,10 +76,10 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			n += _putchar(*format);
+	  _putchar(format[i]); 
+            printed_chars++;
 		}
-		format++;
-	}
+		}
 	va_end(args);
 	return (n);
 }
