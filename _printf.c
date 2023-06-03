@@ -47,6 +47,18 @@ int _printf(const char *format, ...)
 				case 'S':
 					n += print_string(va_arg(args, const char *));
 					break;
+				case 'u':
+					n += print_unsigned(va_arg(args, int));
+					break;
+				case 'x':
+					n += print_lowerhex(va_arg(args, int));
+					break;
+				case 'o':
+					n += print_octal(va_arg(args, int));
+					break;
+				case 'X':
+					n += print_upperhex(va_arg(args, int));
+					break;
 
 				default:
 					break;
