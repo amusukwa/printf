@@ -59,6 +59,9 @@ int _printf(const char *format, ...)
 				case 'X':
 					n += print_upperhex(va_arg(args, int));
 					break;
+				case 'b':
+					n += print_binary(va_arg(args, int));
+					break;
 
 				default:
 					break;
