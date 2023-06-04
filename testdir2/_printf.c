@@ -35,12 +35,26 @@ int _printf(const char *format, ...)
 				case '%':
 					n += _putchar('%');
 					break;
+				case 'd':
+					n += print_int(va_arg(args, int));
+					break;
+				case 'i':
+					n += print_int(va_arg(args, int));
+					break;
 				case 'p':
 					n += find_pointer(va_arg(args, void *));
 					break;
+				case 'S':
+					n += print_string(va_arg(args, const char *));
+					break;
+				case 'b':
+					n += print_binary(va_arg(args,  int));
+					break;
 
 				default:
-					break;
+                       		      n += _putchar('%');
+				      n += _putchar(*format);                  		      
+                   			 break;
 			}
 		}
 		else
