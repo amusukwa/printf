@@ -48,8 +48,8 @@ int _printf(const char *format, ...)
 					n += print_string(va_arg(args, const char *));
 					break;
 				case 'b':
-					n += print_binary(va_arg(args,  int));
-					break;
+				  n += printBin(va_arg(args, unsigned int), NULL, 0, 0, 0, 0);
+				 break;
 
 				default:
                        		      n += _putchar('%');
