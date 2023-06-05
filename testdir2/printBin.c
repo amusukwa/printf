@@ -1,18 +1,5 @@
 #include "main.h"
 #include <unistd.h>
-/**
- * prinBin - Prints an unsigned number
- * @types: Lista of arguments
- * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags
- * @width: get width.
- * @precision: Precision specification
- * @size: Size specifier
- * Return: Numbers of char printed.
- */
-
-#include "main.h"
-#include <unistd.h>
 
 /**
  * printBin - Prints an unsigned number

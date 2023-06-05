@@ -9,7 +9,7 @@
 int _printf(const char *format, ...)
 {
 	int n = 0;
-	char *str;
+
 
 	va_list args;
 
@@ -28,10 +28,9 @@ int _printf(const char *format, ...)
 				case 'c':
 					n += _putchar(va_arg(args, int));
 					break;
-				case 's':
-					for (str = va_arg(args, char *); *str; str++)
-						n += _putchar(*str);
-					break;
+				/**case 's':
+					n += print_string(va_arg(args, const char*), flags, width, precision, size);
+					break;*/
 				case '%':
 					n += _putchar('%');
 					break;
