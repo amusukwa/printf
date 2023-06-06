@@ -10,7 +10,7 @@
  * @size: Size specifier
  * Return: Number of characters printed
  */
-nt print_string(const char *str, int flags, int width, int precision, int size)
+int printstring(const char *str, int flags, int width, int precision)
 {
     int length = 0, i;
 
@@ -43,4 +43,5 @@ nt print_string(const char *str, int flags, int width, int precision, int size)
 
     return write(1, str, length);
 }
+
 

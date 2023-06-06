@@ -9,6 +9,11 @@
 int _printf(const char *format, ...)
 {
 	int n = 0;
+	 char *str;
+      /** int precision = 0;
+       int width = 0;
+       int flags = 0;*/
+
 
 
 	va_list args;
@@ -28,9 +33,12 @@ int _printf(const char *format, ...)
 				case 'c':
 					n += _putchar(va_arg(args, int));
 					break;
-				/**case 's':
-					n += print_string(va_arg(args, const char*), flags, width, precision, size);
-					break;*/
+				case 's':
+					str = va_arg(args, char *);
+                                        if (str == NULL)
+                                        str = "(null)";
+                                         n += printstring(str, 0, 0, 0);
+					break;
 				case '%':
 					n += _putchar('%');
 					break;

@@ -14,6 +14,6 @@ int putstr(char *string);
 int _printf(const char *format, ...);
 int print_binary(int number);
 int printBin(unsigned int num, char buffer[], int flags, int width, int precision, int size);
-int printstring(int str_length, char buffer[], int flags, int width, int precision, int size);
+int printstring(const char *str, int flags, int width, int precision);
 
 #endif
